@@ -1,1 +1,1 @@
-This is HCR-tutorial for Lu under the instrucion of Katie
+This is HCR-tutorial for Lu under the instruction of Katie
