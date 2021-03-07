@@ -16,8 +16,8 @@ def Standard_DMD(X,Y):
 
 	V = np.conjugate(Vh)
 	V = V.T					 
-	Uh = np.conjugate(U)					#Uh is the complex conjugate of U
-	U = U.T
+	Uh = np.conjugate(U)					
+	Uh = Uh.T						#Uh is the complex conjugate of U
 
 	s = np.diag(s)			 			#resize the s		
 	s_inv = LA.inv(s)					#s_inv is the inverse of s
