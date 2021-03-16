@@ -27,7 +27,8 @@ def Standard_DMD(X,Y):
 
 	#eig of A_Tilde
 	lamda,omega = LA.eig(A_Tilde)
-	return lamda,omega
+	phi = U@omega
+	return phi
 
 
 #arrange the data
@@ -38,13 +39,13 @@ for i in range(0,30):
 	Y = Y.astype(np.float64)
 	X = X.T							#X.T means tranpose of X
 	Y = Y.T
-	lamda,omega = Standard_DMD(X,Y)
+	phi = Standard_DMD(X,Y)
 	if i == 0:
-		L = lamda
-		O = omega
+		p = phi
 	else:
-		L = np.append(L, lamda)
-		O = np.append(O, omega, axis=1)
+		p = np.append(p, phi,axis = 1)
+print(p.shape)
 
-print(L.shape)
-print(O.shape)
+
+
+
