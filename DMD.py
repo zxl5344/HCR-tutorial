@@ -4,7 +4,7 @@ from numpy import linalg as LA
 import pandas as pd
 
 #read data from excel
-wb = load_workbook(filename = 'P_car_data.xlsx')
+wb = load_workbook(filename = '#P_car_data.xlsx')
 name = wb.sheetnames[0]
 sheet_ranges = wb[name]						#first sheets of excel
 df = pd.DataFrame(sheet_ranges.values)

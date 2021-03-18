@@ -20,9 +20,14 @@ def Standard_DMD(X,Y):
 		#define Nex matrix
 		A_Tilde = Uh@Y@V@s_inv
 
-		#eig of A_Tilde
+		#eig of A_Tilde 
 		lamda,omega = LA.eig(A_Tilde)
-		phi = U@omega
+
+		#define phi
+		for i in range(0,len(lamda)): 
+			omega[:,i] *=lamda[i]
+
+		phi = Y@V@LA.inv(np.diag(lamda))@omega
 		return phi
 	except:
 		U = 1; s = LA.norm(X); Vh = X/s				

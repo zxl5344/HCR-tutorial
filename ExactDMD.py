@@ -4,7 +4,7 @@ from numpy import linalg as LA
 import pandas as pd
 
 #read data from excel
-wb = load_workbook(filename = 'P_car_data.xlsx')
+wb = load_workbook(filename = '#P_car_data.xlsx')
 name = wb.sheetnames[0]
 sheet_ranges = wb[name]						#first sheets of excel
 df = pd.DataFrame(sheet_ranges.values)
@@ -43,9 +43,12 @@ for i in range(0,30):
 	Y = Y.astype(np.float64)
 	X = X.T							#X.T means tranpose of X
 	Y = Y.T
-	phi = Exact_DMD(X,Y)
 	if i == 0:
-		p = phi
+		X1 = X
+		Y1 = Y
 	else:
-		p = np.append(p, phi,axis = 1)
-print(p.shape)
+		X1 = np.append(X1,X,axis = 1)
+		Y1 = np.append(Y1,Y,axis = 1)
+
+phi = Exact_DMD(X1,Y1)
+print(phi)
