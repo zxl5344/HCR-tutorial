@@ -23,7 +23,7 @@ def Standard_DMD(X,Y):
 		#eig of A_Tilde
 		lamda,omega = LA.eig(A_Tilde)
 		phi = U@omega
-		return phi
+		return lamda,phi
 	except:
 		U = 1; s = LA.norm(X); Vh = X/s				
 

@@ -28,7 +28,7 @@ def Standard_DMD(X,Y):
 			omega[:,i] *=lamda[i]
 
 		phi = Y@V@LA.inv(np.diag(lamda))@omega
-		return phi
+		return lamda,phi
 	except:
 		U = 1; s = LA.norm(X); Vh = X/s				
 
