@@ -59,8 +59,8 @@ def Koopman(X, Y):
     return K
 
 
-windowsize = 10
-overlap = 0
+windowsize = 30
+overlap = 5
 # arrange the data
 
 for i in range(0, 30):

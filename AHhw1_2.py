@@ -53,6 +53,10 @@ for i in range(0, int(t_final / dt) - 1):
 
 # plot
 plt.plot(X[0, :], X[1, :])
+plt.scatter(X[0, 0], X[1, 0], label = 'start point')
+plt.scatter(X[0, int(t_final / dt) - 1], X[1, int(t_final / dt) - 1], label = 'final point')
 plt.xlabel("x1")
 plt.ylabel("x2")
+plt.legend()
+plt.grid()
 plt.show()
