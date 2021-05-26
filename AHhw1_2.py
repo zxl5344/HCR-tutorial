@@ -3,29 +3,24 @@ import matplotlib.pyplot as plt
 
 
 # define function
-def f(P, A, B, Q, R):
-    return -P * A - A.T * P + P * B / R * B.T * P + Q
+def f(P):
+    return -P @ A - A.T @ P + P @ B / R @ B.T @ P - Q
 
 
 # Finds value of y for a given x using step size h
 # and initial value y0 at x0.
-def recatti(P_final, A, B, Q, R, t_final, dt):
+def rk4(P_final, t_final, dt, f):
     # Iterate for number of iterations
     P = np.zeros((2, 2 * int(t_final / dt)))
-    P[0:2, (2 * int(t_final / dt) - 2):(2 * int(t_final / dt))] = P_final
+    P[:, (2 * int(t_final / dt) - 2):(2 * int(t_final / dt))] = P_final
     for i in range(int(t_final / dt) - 1, 0, -1):
-        k1 = dt * f(P[0:2, 2 * i:2 * i + 2], A, B, Q, R)
-        k2 = dt * f(P[0:2, 2 * i:2 * i + 2] + k1 / 2., A, B, Q, R)
-        k3 = dt * f(P[0:2, 2 * i:2 * i + 2] + k2 / 2., A, B, Q, R)
-        k4 = dt * f(P[0:2, 2 * i:2 * i + 2] + k3, A, B, Q, R)
+        print(P[:, 2 * i:2 * i + 2])
+        k1 = dt * f(P[:, 2 * i:2 * i + 2])
+        k2 = dt * f(P[:, 2 * i:2 * i + 2] - k1 / 2.)
+        k3 = dt * f(P[:, 2 * i:2 * i + 2] - k2 / 2.)
+        k4 = dt * f(P[:, 2 * i:2 * i + 2] - k3)
         # Update next value of p
-        P[0:2, 2 * i - 2:2 * i] = P[0:2, 2 * i:2 * i + 2] - (1 / 6.) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)
-        '''
-        print("old one")
-        print(P[0:2, 2 * i:2 * i + 2])
-        print('new one')
-        print(P[0:2, 2*i-2:2*i])
-        '''
+        P[:, 2 * i - 2:2 * i] = P[:, 2 * i:2 * i + 2] - (1 / 6.) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)
     return P
 
 
@@ -37,10 +32,10 @@ A = np.array([[0, 1], [-1.6, -0.4]])
 B = np.array([[0], [1]])
 P_10 = P1
 t_final = 10
-dt = 0.001
+dt = 0.01
 
 # find P
-P = recatti(P_10, A, B, Q, R, t_final, dt)
+P = rk4(P_10, t_final, dt, f)
 
 # simulation
 X = np.zeros((2, int(t_final / dt)))
